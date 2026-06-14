@@ -23,21 +23,22 @@ export default function ScrollyCanvas() {
     const loadedImages: HTMLImageElement[] = []
     let loadedCount = 0
 
+    const markLoaded = () => {
+      loadedCount++
+      if (loadedCount === TOTAL_FRAMES) {
+        imagesRef.current = loadedImages
+        setIsLoaded(true)
+        setTimeout(() => renderFrame(0), 100)
+      }
+    }
+
     for (let i = 0; i < TOTAL_FRAMES; i++) {
       const img = new Image()
       const idx = String(i).padStart(3, '0')
       img.src = `/sequence/frame_${idx}_delay-0.066s.webp`
-      
-      img.onload = () => {
-        loadedCount++
-        if (loadedCount === TOTAL_FRAMES) {
-          imagesRef.current = loadedImages
-          setIsLoaded(true)
-          // Initially render frame 0 once
-          // We must defer to let React state commit if needed, or simply render
-          setTimeout(() => renderFrame(0), 100)
-        }
-      }
+
+      img.onload = markLoaded
+      img.onerror = markLoaded
       loadedImages.push(img)
     }
   }, [])

@@ -43,7 +43,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section className="relative bg-transparent py-20 px-4 sm:px-6 md:px-12 lg:px-24">
+    <section className="relative bg-transparent py-20 px-4 sm:px-6 md:px-12 lg:px-24 overflow-x-clip">
       <div className="max-w-7xl mx-auto z-10 relative">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
