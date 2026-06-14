@@ -1,38 +1,43 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FiGithub } from 'react-icons/fi'
+import { FiExternalLink, FiGithub } from 'react-icons/fi'
 
 import ArchitectureDiagram from './ArchitectureDiagram'
 
 const projects = [
   {
     title: 'JourneySync App (Startup Idea)',
-    category: 'Full-Stack • Real-time',
+    category: 'Full-Stack - Real-time',
     desc: 'A comprehensive platform for live ride coordination and journey management. Features real-time maps, sophisticated user lobbies, ride radar, and a join-request approval flow designed to streamline shared travel.',
     color: 'from-pink-500/30 to-rose-500/30',
-    repoUrl: 'https://github.com/pranavv1210/JourneySync-App'
+    repoUrl: 'https://github.com/pranavv1210/JourneySync-App',
+    liveUrl: 'https://journeysync-app.vercel.app/',
+    diagram: 'journeysync'
   },
   {
     title: 'AI Resume Screener & Chatbot',
-    category: 'React • Node.js • NLP',
-    desc: 'Automates resume screening and candidate engagement. Uses Hugging Face & spaCy NLP to semantically match candidates, providing explainable scores and real-time chatbot feedback.',
+    category: 'React - Node.js - NLP',
+    desc: 'Automates resume screening and candidate engagement. Uses Hugging Face and spaCy NLP to semantically match candidates, providing explainable scores and real-time chatbot feedback.',
     color: 'from-purple-500/30 to-blue-500/30',
-    repoUrl: 'https://github.com/pranavv1210/AI-Driven-Resume-Screening'
+    repoUrl: 'https://github.com/pranavv1210/AI-Driven-Resume-Screening',
+    diagram: 'ai-resume'
   },
   {
-    title: 'T&C Summarizer (n8n & FAISS)',
-    category: 'Python • Flask • GenAI',
-    desc: 'Generates plain-language summaries of complex legal terms using Hugging Face Transformers. Scales via n8n workflows and FAISS vector search for accessible legal transparency.',
+    title: 'CardioGuard: AI Heart Analyzer',
+    category: 'Python - TensorFlow Lite - Mobile AI',
+    desc: 'Transforms smartphones into AI-powered cardiac screening tools using mel-spectrogram preprocessing and deep learning. Optimized with TensorFlow Lite for real-time, offline heart-sound analysis.',
     color: 'from-emerald-500/30 to-teal-500/30',
-    repoUrl: 'https://github.com/pranavv1210/Terms-and-Conditions-Summarizer-using-n8n'
+    repoUrl: 'https://github.com/pranavv1210/cardio-guard',
+    diagram: 'cardio-guard'
   },
   {
-    title: 'Student Mental Health Analytics',
-    category: 'Python • MySQL • Pandas',
-    desc: 'Advanced data analysis pipeline tracking correlations between demographics and mental health. Includes ETL scripts and normalized relational SQL schemas with complex aggregation.',
+    title: 'Operation Gridlock',
+    category: 'GenAI - Computer Vision - Real-time Tracking',
+    desc: 'A vehicle detection and pursuit system for citywide CCTV networks. Combines segmentation, visual restoration, and route forecasting to isolate target vehicles and generate geo-coordinate alerts.',
     color: 'from-orange-500/30 to-red-500/30',
-    repoUrl: 'https://github.com/pranavv1210/Student-Mental-Health-Analysis-SQL'
+    repoUrl: 'https://github.com/pranavv1210/gridlock-vehicle-tracking',
+    diagram: 'gridlock'
   }
 ]
 
@@ -54,38 +59,46 @@ export default function Projects() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {projects.map((proj, idx) => (
             <motion.div
-              key={idx}
+              key={proj.title}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: idx * 0.1 }}
               className="group relative rounded-3xl p-[1px] overflow-hidden"
             >
-              <div 
-                className={`absolute inset-0 bg-gradient-to-br ${proj.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out`} 
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${proj.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out`}
               />
-              
+
               <div className="relative h-full w-full bg-[#1a1a1a]/40 backdrop-blur-2xl rounded-3xl p-10 lg:p-12 border border-white/10 hover:border-white/20 transition-colors flex flex-col justify-between min-h-[400px]">
                 <div>
                   <p className="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-[0.1em]">{proj.category}</p>
                   <h3 className="text-3xl font-bold text-white mb-6 tracking-tight leading-snug">{proj.title}</h3>
                   <p className="text-gray-400 text-lg leading-relaxed">{proj.desc}</p>
-                  {proj.title.includes('JourneySync') && <ArchitectureDiagram type="journeysync" />}
-                  {proj.title.includes('AI Resume') && <ArchitectureDiagram type="ai-resume" />}
-                  {proj.title.includes('T&C') && <ArchitectureDiagram type="tc-summarizer" />}
-                  {proj.title.includes('Mental Health') && <ArchitectureDiagram type="mental-health" />}
+                  <ArchitectureDiagram type={proj.diagram} />
                 </div>
-                
-                <div className="flex gap-6 mt-12">
-                  <a 
-                    href={proj.repoUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
+
+                <div className="flex flex-wrap gap-6 mt-12">
+                  <a
+                    href={proj.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm font-medium tracking-wide z-10"
                   >
                     <FiGithub size={20} />
                     <span>View Repository</span>
                   </a>
+                  {proj.liveUrl && (
+                    <a
+                      href={proj.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm font-medium tracking-wide z-10"
+                    >
+                      <FiExternalLink size={20} />
+                      <span>View Website</span>
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -107,11 +120,10 @@ export default function Projects() {
           >
             <FiGithub className="scale-110 group-hover:scale-125 transition-transform" />
             <span className="font-semibold tracking-wide">View More on GitHub</span>
-            <span className="text-purple-400 group-hover:translate-x-1 transition-transform">→</span>
+            <span className="text-purple-400 group-hover:translate-x-1 transition-transform">-&gt;</span>
           </a>
         </motion.div>
       </div>
     </section>
   )
 }
-

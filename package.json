@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && rm -rf build && mv out build",
+    "build": "next build && node -e \"const fs=require('fs');fs.rmSync('build',{recursive:true,force:true});fs.renameSync('out','build');\"",
     "start": "next start",
     "lint": "next lint"
   },

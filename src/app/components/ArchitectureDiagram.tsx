@@ -53,6 +53,59 @@ export default function ArchitectureDiagram({ type = "journeysync" }: { type?: s
     )
   }
 
+  if (type === "cardio-guard") {
+    return (
+      <div className="w-full mt-6 bg-[#0a0a0a]/80 backdrop-blur-sm rounded-2xl border border-white/5 overflow-hidden p-6 relative group flex justify-center shadow-inner">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:15px_15px] opacity-40" />
+        <div className="relative w-[300px] h-[200px] mx-auto z-10 transition-transform duration-700 group-hover:scale-[1.02]">
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 300 200">
+            <path id="cg-p1" d="M 35 100 L 105 100" stroke="rgba(20, 184, 166, 0.35)" strokeWidth="2" strokeDasharray="4,4" fill="none" />
+            <path id="cg-p2" d="M 115 100 L 185 100" stroke="rgba(34, 197, 94, 0.35)" strokeWidth="2" strokeDasharray="4,4" fill="none" />
+            <path id="cg-p3" d="M 195 100 L 265 100" stroke="rgba(14, 165, 233, 0.35)" strokeWidth="2" strokeDasharray="4,4" fill="none" />
+
+            <circle r="3" fill="#fff"><animateMotion dur="1s" repeatCount="indefinite"><mpath href="#cg-p1" /></animateMotion></circle>
+            <circle r="3" fill="#fff"><animateMotion dur="1s" repeatCount="indefinite" begin="0.3s"><mpath href="#cg-p2" /></animateMotion></circle>
+            <circle r="3" fill="#fff"><animateMotion dur="1s" repeatCount="indefinite" begin="0.6s"><mpath href="#cg-p3" /></animateMotion></circle>
+          </svg>
+
+          <div className="absolute left-[15px] top-[80px] w-10 text-center"><div className="w-10 h-10 bg-[#1a1a1a] rounded flex items-center justify-center border border-white/20 text-[10px] font-bold">AUDIO</div><p className="text-[9px] text-gray-400 mt-1">INPUT</p></div>
+          <div className="absolute left-[95px] top-[80px] w-10 text-center"><div className="w-10 h-10 bg-[#1a1a1a] rounded flex items-center justify-center border border-teal-500/50 text-[10px] font-bold">MEL</div><p className="text-[9px] text-teal-300 mt-1">PREP</p></div>
+          <div className="absolute left-[175px] top-[80px] w-10 text-center"><div className="w-10 h-10 bg-[#1a1a1a] rounded flex items-center justify-center border border-green-500/50 text-[10px] font-bold">TFL</div><p className="text-[9px] text-green-300 mt-1">MODEL</p></div>
+          <div className="absolute left-[255px] top-[80px] w-10 text-center"><div className="w-10 h-10 bg-[#1a1a1a] rounded flex items-center justify-center border border-sky-400/50 text-[10px] font-bold">APP</div><p className="text-[9px] text-sky-400 mt-1">RESULT</p></div>
+        </div>
+      </div>
+    )
+  }
+
+  if (type === "gridlock") {
+    return (
+      <div className="w-full mt-6 bg-[#0a0a0a]/80 backdrop-blur-sm rounded-2xl border border-white/5 overflow-hidden p-6 relative group flex justify-center shadow-inner">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:15px_15px] opacity-40" />
+        <div className="relative w-[300px] h-[200px] mx-auto z-10 transition-transform duration-700 group-hover:scale-[1.02]">
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 300 200">
+            <path id="gl-p1" d="M 35 100 L 115 100" stroke="rgba(249, 115, 22, 0.35)" strokeWidth="2" strokeDasharray="4,4" fill="none" />
+            <path id="gl-p2" d="M 125 100 L 205 55" stroke="rgba(239, 68, 68, 0.35)" strokeWidth="2" strokeDasharray="4,4" fill="none" />
+            <path id="gl-p3" d="M 125 100 L 205 145" stroke="rgba(168, 85, 247, 0.35)" strokeWidth="2" strokeDasharray="4,4" fill="none" />
+            <path id="gl-p4" d="M 215 55 L 265 100" stroke="rgba(56, 189, 248, 0.35)" strokeWidth="2" strokeDasharray="4,4" fill="none" />
+            <path id="gl-p5" d="M 215 145 L 265 100" stroke="rgba(56, 189, 248, 0.35)" strokeWidth="2" strokeDasharray="4,4" fill="none" />
+
+            <circle r="3" fill="#fff"><animateMotion dur="1s" repeatCount="indefinite"><mpath href="#gl-p1" /></animateMotion></circle>
+            <circle r="3" fill="#fff"><animateMotion dur="1.2s" repeatCount="indefinite" begin="0.2s"><mpath href="#gl-p2" /></animateMotion></circle>
+            <circle r="3" fill="#fff"><animateMotion dur="1.2s" repeatCount="indefinite" begin="0.5s"><mpath href="#gl-p3" /></animateMotion></circle>
+            <circle r="3" fill="#fff"><animateMotion dur="1s" repeatCount="indefinite" begin="0.7s"><mpath href="#gl-p4" /></animateMotion></circle>
+            <circle r="3" fill="#fff"><animateMotion dur="1s" repeatCount="indefinite" begin="0.9s"><mpath href="#gl-p5" /></animateMotion></circle>
+          </svg>
+
+          <div className="absolute left-[15px] top-[80px] w-10 text-center"><div className="w-10 h-10 bg-[#1a1a1a] rounded flex items-center justify-center border border-white/20 text-[10px] font-bold">CCTV</div><p className="text-[9px] text-gray-400 mt-1">FEED</p></div>
+          <div className="absolute left-[105px] top-[80px] w-10 text-center"><div className="w-10 h-10 bg-[#1a1a1a] rounded flex items-center justify-center border border-orange-500/50 text-[10px] font-bold">SAM</div><p className="text-[9px] text-orange-300 mt-1">SEG</p></div>
+          <div className="absolute left-[195px] top-[35px] w-10 text-center"><div className="w-10 h-10 bg-[#1a1a1a] rounded flex items-center justify-center border border-red-500/50 text-[10px] font-bold">AI</div><p className="text-[9px] text-red-300 mt-1">RESTORE</p></div>
+          <div className="absolute left-[195px] top-[125px] w-10 text-center"><div className="w-10 h-10 bg-[#1a1a1a] rounded flex items-center justify-center border border-purple-500/50 text-[10px] font-bold">ETA</div><p className="text-[9px] text-purple-300 mt-1">ROUTE</p></div>
+          <div className="absolute left-[255px] top-[80px] w-10 text-center"><div className="w-10 h-10 bg-[#1a1a1a] rounded flex items-center justify-center border border-sky-400/50 text-[10px] font-bold">GPS</div><p className="text-[9px] text-sky-400 mt-1">ALERT</p></div>
+        </div>
+      </div>
+    )
+  }
+
   if (type === "tc-summarizer") {
     // LAYOUT 3: DIAMOND CYCLE (Doc -> Flask -> n8n -> FAISS -> back to Flask)
     return (

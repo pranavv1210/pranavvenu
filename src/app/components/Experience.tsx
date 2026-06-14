@@ -22,7 +22,7 @@ export default function Experience() {
               <div className="absolute w-3 h-3 bg-purple-500 rounded-full -left-[6.5px] top-2 shadow-[0_0_10px_rgba(168,85,247,0.5)]" />
               <p className="text-sm text-purple-400 font-medium mb-1">Expected 2026</p>
               <h3 className="text-xl font-bold text-white">B.E. in Artificial Intelligence & ML</h3>
-              <p className="text-gray-400 mt-2 leading-relaxed">CMR Institute of Technology, Bengaluru.<br/>CGPA: 8.51</p>
+              <p className="text-gray-400 mt-2 leading-relaxed">CMR Institute of Technology, Bengaluru.<br/>CGPA: 8.66</p>
             </div>
             <div className="relative pl-6 border-l border-white/10">
               <div className="absolute w-3 h-3 bg-purple-500 rounded-full -left-[6.5px] top-2 shadow-[0_0_10px_rgba(168,85,247,0.5)]" />
