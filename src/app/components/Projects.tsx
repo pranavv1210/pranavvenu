@@ -43,7 +43,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section className="relative bg-transparent py-24 px-6 md:px-12 lg:px-24">
+    <section className="relative bg-transparent py-20 px-4 sm:px-6 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto z-10 relative">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -51,12 +51,12 @@ export default function Projects() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-16 tracking-tight drop-shadow-sm">
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-12 md:mb-16 tracking-tight drop-shadow-sm">
             Selected Work
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
           {projects.map((proj, idx) => (
             <motion.div
               key={proj.title}
@@ -64,21 +64,21 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, delay: idx * 0.1 }}
-              className="group relative rounded-3xl p-[1px] overflow-hidden"
+              className="group relative rounded-2xl md:rounded-3xl p-[1px] overflow-hidden"
             >
               <div
                 className={`absolute inset-0 bg-gradient-to-br ${proj.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out`}
               />
 
-              <div className="relative h-full w-full bg-[#1a1a1a]/40 backdrop-blur-2xl rounded-3xl p-10 lg:p-12 border border-white/10 hover:border-white/20 transition-colors flex flex-col justify-between min-h-[400px]">
+              <div className="relative h-full w-full bg-[#1a1a1a]/40 backdrop-blur-2xl rounded-2xl md:rounded-3xl p-5 sm:p-8 lg:p-12 border border-white/10 hover:border-white/20 transition-colors flex flex-col justify-between min-h-[360px] md:min-h-[400px]">
                 <div>
-                  <p className="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-[0.1em]">{proj.category}</p>
-                  <h3 className="text-3xl font-bold text-white mb-6 tracking-tight leading-snug">{proj.title}</h3>
-                  <p className="text-gray-400 text-lg leading-relaxed">{proj.desc}</p>
+                  <p className="text-xs sm:text-sm font-semibold text-gray-500 mb-3 uppercase tracking-[0.08em] sm:tracking-[0.1em] leading-relaxed">{proj.category}</p>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-6 tracking-tight leading-snug break-words">{proj.title}</h3>
+                  <p className="text-gray-400 text-base sm:text-lg leading-relaxed">{proj.desc}</p>
                   <ArchitectureDiagram type={proj.diagram} />
                 </div>
 
-                <div className="flex flex-wrap gap-6 mt-12">
+                <div className="flex flex-wrap gap-x-6 gap-y-4 mt-8 sm:mt-12">
                   <a
                     href={proj.repoUrl}
                     target="_blank"
@@ -116,7 +116,7 @@ export default function Projects() {
             href="https://github.com/pranavv1210"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 px-8 py-4 rounded-full bg-[#1a1a1a] hover:bg-[#252525] border border-white/10 hover:border-purple-500/50 text-white transition-all shadow-lg hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] group"
+            className="flex items-center justify-center gap-3 px-6 sm:px-8 py-4 rounded-full bg-[#1a1a1a] hover:bg-[#252525] border border-white/10 hover:border-purple-500/50 text-white transition-all shadow-lg hover:shadow-[0_0_20px_rgba(168,85,247,0.2)] group max-w-full"
           >
             <FiGithub className="scale-110 group-hover:scale-125 transition-transform" />
             <span className="font-semibold tracking-wide">View More on GitHub</span>
