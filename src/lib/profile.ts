@@ -46,13 +46,13 @@ export const stackGroups = [
     id: 'AI',
     title: 'AI / ML',
     items: ['TensorFlow', 'OpenCV', 'NLP', 'Hugging Face', 'LLMs', 'Computer Vision'],
-    related: ['AI Hiring OS', 'CardioGuard', 'Operation Gridlock'],
+    related: ['CardioGuard', 'Operation Gridlock', 'Frame Your Goa'],
   },
   {
     id: 'WEB',
     title: 'Full-stack',
     items: ['React', 'Next.js', 'Node.js', 'Express', 'HTML'],
-    related: ['AI Hiring OS', 'Frame Your Goa', 'WorkState'],
+    related: ['JourneySync', 'Frame Your Goa', 'WorkState'],
   },
   {
     id: 'DATA',
@@ -70,6 +70,6 @@ export const stackGroups = [
     id: 'SYSTEMS',
     title: 'Automation',
     items: ['n8n', 'Flask', 'FAISS', 'Git', 'GitHub', 'Azure'],
-    related: ['WorkState', 'AI Hiring OS', 'AquaFlow'],
+    related: ['WorkState', 'AquaFlow', 'Frame Your Goa'],
   },
 ]

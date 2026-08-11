@@ -314,6 +314,11 @@ html[data-theme='light'] .text-outline {
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--surface);
+  background-image:
+    radial-gradient(circle at 50% 42%, var(--shadow-accent), transparent 12rem),
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: auto, 28px 28px, 28px 28px;
 }
 
 .visual-topbar {
@@ -328,6 +333,38 @@ html[data-theme='light'] .text-outline {
   width: 0.45rem;
   border-radius: 999px;
   background: var(--muted);
+}
+
+.project-system-svg {
+  position: absolute;
+  inset: 3.15rem 1.2rem 1.2rem;
+  width: calc(100% - 2.4rem);
+  height: calc(100% - 4.35rem);
+}
+
+.project-system-path {
+  fill: none;
+  stroke-width: 0.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 90;
+  stroke-dashoffset: 90;
+  animation: drawPath 1.5s ease forwards, pulsePath 3.8s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.16s), calc(1.5s + var(--i) * 0.16s);
+}
+
+.project-system-node rect {
+  fill: color-mix(in srgb, var(--bg) 84%, transparent);
+  stroke: color-mix(in srgb, var(--accent) 48%, transparent);
+  stroke-width: 0.32;
+}
+
+.project-system-node text {
+  fill: var(--text);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 2px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
 }
 
 .visual-stage {
@@ -468,9 +505,9 @@ html[data-theme='light'] .text-outline {
 .flow-line {
   fill: none;
   stroke: var(--accent);
-  stroke-width: 0.38;
-  stroke-opacity: 0.58;
-  stroke-dasharray: 2 1.6;
+  stroke-width: 0.5;
+  stroke-opacity: 0.68;
+  stroke-dasharray: 1.8 1.3;
 }
 
 .flow-arrow {
@@ -481,7 +518,7 @@ html[data-theme='light'] .text-outline {
 .flow-node-core {
   fill: var(--bg);
   stroke: var(--accent);
-  stroke-width: 0.32;
+  stroke-width: 0.34;
 }
 
 .flow-node-ring {
@@ -500,12 +537,12 @@ html[data-theme='light'] .text-outline {
 
 .flow-node-id {
   fill: var(--accent);
-  font-size: 2px;
+  font-size: 2.15px;
 }
 
 .flow-node-label {
   fill: var(--text);
-  font-size: 2.45px;
+  font-size: 2.35px;
   font-weight: 800;
 }
 
@@ -659,6 +696,15 @@ html[data-theme='light'] .text-outline {
 @keyframes scan {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(100%); }
+}
+
+@keyframes drawPath {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes pulsePath {
+  0%, 100% { opacity: 0.58; }
+  50% { opacity: 1; }
 }
 
 @media (max-width: 640px) {

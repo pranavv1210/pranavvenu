@@ -72,41 +72,6 @@ export const projects: Project[] = [
   },
   {
     id: 'PROJECT 02',
-    slug: 'ai-hiring-os',
-    name: 'AI Hiring OS',
-    shortName: 'Recruiting Operating System',
-    category: 'AI Agents / HRMS / Full-stack',
-    year: '2026',
-    status: 'Working live build',
-    role: 'AI recruiting workflows, product architecture, full-stack implementation',
-    description:
-      'A multi-tenant HRMS and AI-powered recruiting platform with resume scoring, adaptive voice interviews, payroll automation, and a recruiter copilot.',
-    problem:
-      'Hiring teams need one place for parsing, scoring, interviews, employee workflows, notifications, and recruiter decision support.',
-    solution:
-      'A productized hiring OS that combines automated resume parsing/scoring, voice interview intelligence, employee review hubs, payroll workflows, and a tool-calling copilot.',
-    outcome:
-      'A stronger, working product surface for showing applied AI, business workflows, and system design together.',
-    stack: ['LLMs', 'AI agents', 'Machine Learning', 'Recruitment', 'HRMS', 'Voice analytics'],
-    highlights: ['Resume parsing/scoring', 'Adaptive voice interviews', 'Attendance-linked payroll', 'Recruiter Copilot', 'Real-time notifications'],
-    github: 'https://github.com/pranavv1210/AI-Hiring-OS',
-    liveUrl: 'https://ai-hiring-os.vercel.app',
-    featured: true,
-    visual: 'document',
-    architecture: {
-      label: 'Recruiting intelligence loop',
-      nodes: [
-        { id: '01', label: 'RESUME', sublabel: 'parse', x: 12, y: 50 },
-        { id: '02', label: 'SCORE', sublabel: 'rank', x: 32, y: 28 },
-        { id: '03', label: 'VOICE', sublabel: 'interview', x: 54, y: 50 },
-        { id: '04', label: 'COPILOT', sublabel: 'tools', x: 74, y: 28 },
-        { id: '05', label: 'HRMS', sublabel: 'action', x: 88, y: 50 },
-      ],
-      links: [['01', '02'], ['02', '03'], ['03', '04'], ['04', '05'], ['02', '04']],
-    },
-  },
-  {
-    id: 'PROJECT 03',
     slug: 'cardioguard',
     name: 'CardioGuard',
     shortName: 'Mobile Heart Sound Classifier',
@@ -141,7 +106,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 'PROJECT 04',
+    id: 'PROJECT 03',
     slug: 'operation-gridlock',
     name: 'Operation Gridlock',
     shortName: 'Vehicle Tracking Intelligence',
@@ -211,7 +176,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 'PROJECT 06',
+    id: 'PROJECT 04',
     slug: 'frame-your-goa',
     name: 'Frame Your Goa',
     shortName: 'Generative Event Graphics',
@@ -231,7 +196,7 @@ export const projects: Project[] = [
     highlights: ['Photo upload', 'Frame modes', 'Generated artifact', 'Share/export flow'],
     github: 'https://github.com/pranavv1210/frame-your-goa',
     liveUrl: 'https://frame-your-goa-iota.vercel.app',
-    featured: false,
+    featured: true,
     visual: 'frame',
     architecture: {
       label: 'Graphics render pipeline',
@@ -246,7 +211,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 'PROJECT 07',
+    id: 'PROJECT 06',
     slug: 'aquaflow',
     name: 'AquaFlow',
     shortName: 'Water Tanker OS',
