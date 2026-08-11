@@ -27,7 +27,7 @@ export default function Lab() {
           >
             <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">{project.status}</span>
             <strong>{project.name}</strong>
-            <span>{project.description}</span>
+            <span className="lab-tile-description">{project.description}</span>
             <em>
               Open case <FiArrowUpRight />
             </em>

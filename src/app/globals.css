@@ -599,6 +599,8 @@ html[data-theme='light'] .text-outline {
 .system-node-4 { right: 14%; bottom: 16%; }
 
 .lab-tile {
+  display: flex;
+  flex-direction: column;
   min-height: 15rem;
   border: 1px solid var(--border);
   background: var(--panel-bg);
@@ -616,7 +618,7 @@ html[data-theme='light'] .text-outline {
   color: var(--text);
 }
 
-.lab-tile span:last-child {
+.lab-tile-description {
   display: block;
   margin-top: 1rem;
   color: var(--secondary);
@@ -626,8 +628,9 @@ html[data-theme='light'] .text-outline {
 .lab-tile em {
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
   gap: 0.35rem;
-  margin-top: 1.2rem;
+  margin-top: 1.25rem;
   color: var(--accent);
   font-family: var(--font-geist-mono), monospace;
   font-size: 10px;
