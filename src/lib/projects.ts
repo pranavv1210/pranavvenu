@@ -196,7 +196,7 @@ export const projects: Project[] = [
     highlights: ['Photo upload', 'Frame modes', 'Generated artifact', 'Share/export flow'],
     github: 'https://github.com/pranavv1210/frame-your-goa',
     liveUrl: 'https://frame-your-goa-iota.vercel.app',
-    featured: true,
+    featured: false,
     visual: 'frame',
     architecture: {
       label: 'Graphics render pipeline',
