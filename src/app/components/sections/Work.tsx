@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { FiExternalLink, FiGithub } from 'react-icons/fi'
 import { featuredProjects } from '@/lib/projects'
 import { fadeUp, stagger } from '@/lib/animations'
-import ArchitectureDiagram from '../ArchitectureDiagram'
 import ProjectVisual from '../ProjectVisual'
 
 export default function Work() {
@@ -45,7 +44,6 @@ export default function Work() {
               </div>
               <div className="grid gap-4">
                 <ProjectVisual project={project} />
-                <ArchitectureDiagram flow={project.architecture} />
               </div>
             </Link>
             <div className="mt-5 flex flex-wrap gap-4">
