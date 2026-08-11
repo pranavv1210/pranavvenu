@@ -1,61 +1,149 @@
 import type { Project } from '@/lib/projects'
 
-const visualLabels: Record<Project['visual'], string[]> = {
-  route: ['RIDER', 'LOBBY', 'ROUTE', 'LIVE', 'SOS'],
-  water: ['ORDER', 'DISPATCH', 'TANKER', 'DELIVER', 'PAY'],
-  editor: ['EDITOR', 'STATE', 'CONTEXT', 'AI', 'ACTION'],
-  frame: ['PHOTO', 'MODE', 'FRAME', 'RENDER', 'SHARE'],
-  signal: ['AUDIO', 'FILTER', 'MEL', 'CNN', 'RISK'],
-  city: ['CCTV', 'DETECT', 'RESTORE', 'FORECAST', 'ALERT'],
-  fitness: ['PLAN', 'HYDRATE', 'METRICS', 'TRAIN', 'PROGRESS'],
+type VisualNode = {
+  label: string
+  detail: string
+  x: number
+  y: number
 }
 
-const paths: Record<Project['visual'], string[]> = {
-  route: ['M12 46 C24 18 38 18 50 44', 'M50 44 C62 70 76 70 88 38', 'M50 44 C62 18 76 18 88 38'],
-  water: ['M12 40 C24 30 32 54 44 40', 'M44 40 C56 26 64 54 76 40', 'M76 40 C82 34 86 34 92 40'],
-  editor: ['M14 26 H42 V42 H64 V28 H88', 'M42 42 L42 58 H72 L72 28'],
-  frame: ['M18 20 H82 V58 H18 Z', 'M30 30 H70 V48 H30 Z', 'M50 20 V58'],
-  signal: ['M10 42 C20 18 30 66 40 42 C50 18 60 66 70 42 C78 24 86 30 92 38'],
-  city: ['M10 52 L24 34 L38 46 L52 24 L66 42 L82 30 L92 48', 'M24 34 H52 V24 H82'],
-  fitness: ['M12 44 C22 24 34 24 44 44 C54 64 66 64 78 36 L90 36'],
+type VisualSpec = {
+  headline: string
+  subline: string
+  nodes: VisualNode[]
+  paths: string[]
+  metrics: string[]
+}
+
+const visuals: Record<Project['visual'], VisualSpec> = {
+  route: {
+    headline: 'Live ride coordination',
+    subline: 'rider intent -> route state -> group safety',
+    nodes: [
+      { label: 'Rider', detail: 'identity', x: 13, y: 46 },
+      { label: 'Lobby', detail: 'join flow', x: 31, y: 24 },
+      { label: 'Route', detail: 'map sync', x: 52, y: 38 },
+      { label: 'Live', detail: 'tracking', x: 72, y: 22 },
+      { label: 'SOS', detail: 'safety', x: 88, y: 48 },
+    ],
+    paths: ['M13 46 C22 20 39 18 52 38 C60 55 72 52 88 48', 'M31 24 C45 12 61 12 72 22', 'M52 38 C62 24 77 24 88 48'],
+    metrics: ['Realtime lobby', 'OpenStreetMap', 'Supabase auth'],
+  },
+  signal: {
+    headline: 'Audio intelligence pipeline',
+    subline: 'raw waveform -> medical signal -> risk output',
+    nodes: [
+      { label: 'Audio', detail: 'input', x: 14, y: 48 },
+      { label: 'Filter', detail: 'clean', x: 32, y: 25 },
+      { label: 'Mel', detail: 'spectrogram', x: 51, y: 50 },
+      { label: 'CNN', detail: 'EffNet', x: 70, y: 25 },
+      { label: 'Risk', detail: 'result', x: 88, y: 48 },
+    ],
+    paths: ['M10 48 C20 12 29 72 40 38 C51 5 58 72 70 25 C77 12 84 28 92 48', 'M14 48 C31 57 47 57 51 50 C58 39 64 31 70 25'],
+    metrics: ['Wavelet denoise', 'Mel windows', 'EfficientNet-B0'],
+  },
+  city: {
+    headline: 'Vehicle pursuit system',
+    subline: 'camera evidence -> tracking graph -> geo alert',
+    nodes: [
+      { label: 'CCTV', detail: 'feed', x: 14, y: 44 },
+      { label: 'Detect', detail: 'vehicle', x: 33, y: 28 },
+      { label: 'Restore', detail: 'clarity', x: 53, y: 45 },
+      { label: 'Forecast', detail: 'route', x: 72, y: 28 },
+      { label: 'Alert', detail: 'gps', x: 88, y: 45 },
+    ],
+    paths: ['M12 54 L33 28 L53 45 L72 28 L90 45', 'M14 44 H53 V28 H72', 'M33 28 C44 14 61 14 72 28'],
+    metrics: ['CCTV graph', 'Route forecast', 'Geo alerting'],
+  },
+  water: {
+    headline: 'Delivery ops flow',
+    subline: 'customer order -> tanker dispatch -> closed payment',
+    nodes: [
+      { label: 'Order', detail: 'request', x: 14, y: 48 },
+      { label: 'Dispatch', detail: 'assign', x: 32, y: 25 },
+      { label: 'Tanker', detail: 'driver', x: 52, y: 48 },
+      { label: 'Deliver', detail: 'status', x: 72, y: 25 },
+      { label: 'Pay', detail: 'close', x: 88, y: 48 },
+    ],
+    paths: ['M14 48 C26 22 40 22 52 48 C64 74 76 74 88 48', 'M32 25 H72'],
+    metrics: ['Riverpod', 'Supabase', 'Material 3'],
+  },
+  editor: {
+    headline: 'Editor context bridge',
+    subline: 'local state -> project context -> AI action',
+    nodes: [
+      { label: 'Editor', detail: 'VS Code', x: 14, y: 34 },
+      { label: 'State', detail: 'local', x: 34, y: 52 },
+      { label: 'Context', detail: 'repo', x: 52, y: 30 },
+      { label: 'AI', detail: 'session', x: 70, y: 52 },
+      { label: 'Action', detail: 'ship', x: 88, y: 34 },
+    ],
+    paths: ['M14 34 H34 V52 H70 V34 H88', 'M34 52 L52 30 L70 52'],
+    metrics: ['Local-first', 'Extension API', 'Context bridge'],
+  },
+  frame: {
+    headline: 'Graphics render loop',
+    subline: 'photo input -> frame mode -> shareable artifact',
+    nodes: [
+      { label: 'Photo', detail: 'input', x: 14, y: 42 },
+      { label: 'Mode', detail: 'select', x: 34, y: 25 },
+      { label: 'Frame', detail: 'compose', x: 52, y: 45 },
+      { label: 'Render', detail: 'png', x: 70, y: 25 },
+      { label: 'Share', detail: 'output', x: 88, y: 42 },
+    ],
+    paths: ['M14 42 H52 V25 H88', 'M34 25 V58 H70 V25', 'M52 45 C62 60 78 58 88 42'],
+    metrics: ['Image mask', 'Canvas export', 'Social asset'],
+  },
+  fitness: {
+    headline: 'Fitness operating layer',
+    subline: 'plan -> body metrics -> progress loops',
+    nodes: [
+      { label: 'Plan', detail: 'training', x: 14, y: 48 },
+      { label: 'Hydrate', detail: 'habit', x: 32, y: 26 },
+      { label: 'Metrics', detail: 'body', x: 52, y: 48 },
+      { label: 'Train', detail: 'goals', x: 72, y: 26 },
+      { label: 'Progress', detail: 'trend', x: 88, y: 48 },
+    ],
+    paths: ['M14 48 C25 20 41 20 52 48 C63 76 77 76 88 48', 'M32 26 H72'],
+    metrics: ['Goals', 'Hydration', 'Progress'],
+  },
 }
 
 export default function ProjectVisual({ project }: { project: Project }) {
-  const labels = visualLabels[project.visual]
-  const routePaths = paths[project.visual]
+  const visual = visuals[project.visual]
 
   return (
-    <div className={`project-visual project-visual-${project.visual}`} aria-hidden="true">
+    <div className={`project-visual project-visual-${project.visual}`} aria-label={`${project.name} system visual`}>
       <div className="visual-topbar">
         <span />
         <span />
         <span />
       </div>
-      <svg className="project-system-svg" viewBox="0 0 100 72">
-        <defs>
-          <linearGradient id={`visual-gradient-${project.slug}`} x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.16" />
-            <stop offset="50%" stopColor="var(--accent)" stopOpacity="0.82" />
-            <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.22" />
-          </linearGradient>
-        </defs>
-        {routePaths.map((path, index) => (
-          <path key={path} d={path} className="project-system-path" stroke={`url(#visual-gradient-${project.slug})`} style={{ ['--i' as string]: index }} />
+      <div className="project-visual-copy">
+        <strong>{visual.headline}</strong>
+        <span>{visual.subline}</span>
+      </div>
+      <svg className="project-system-svg" viewBox="0 0 100 72" role="img" aria-label={visual.headline}>
+        {visual.paths.map((path, index) => (
+          <path key={path} d={path} className="project-system-path" style={{ ['--i' as string]: index }} />
         ))}
-        {labels.map((label, index) => {
-          const x = 12 + index * 19
-          const y = index % 2 === 0 ? 24 : 54
-
-          return (
-            <g key={label} className="project-system-node" transform={`translate(${x} ${y})`}>
-              <rect x="-8.5" y="-5.2" width="17" height="10.4" rx="1.8" />
-              <text textAnchor="middle" y="1.6">
-                {label}
-              </text>
-            </g>
-          )
-        })}
+        {visual.nodes.map((node, index) => (
+          <g key={node.label} className="project-system-node" transform={`translate(${node.x} ${node.y})`} style={{ ['--i' as string]: index }}>
+            <circle r="4.2" />
+            <text textAnchor="middle" y="-7.2" className="project-node-label">
+              {node.label}
+            </text>
+            <text textAnchor="middle" y="10.2" className="project-node-detail">
+              {node.detail}
+            </text>
+          </g>
+        ))}
       </svg>
+      <div className="project-visual-metrics">
+        {visual.metrics.map((metric) => (
+          <span key={metric}>{metric}</span>
+        ))}
+      </div>
       <div className="visual-scanline" />
     </div>
   )

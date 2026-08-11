@@ -23,7 +23,11 @@ export default function CustomCursor() {
       setPosition({ x: event.clientX, y: event.clientY })
       setVisible(true)
 
-      const target = event.target as HTMLElement
+      const target = event.target
+      if (!(target instanceof Element)) {
+        setLabel('idle')
+        return
+      }
       const cursorTarget = target.closest<HTMLElement>('[data-cursor]')
       const hrefTarget = target.closest('a')
       setLabel((cursorTarget?.dataset.cursor as CursorState | undefined) ?? (hrefTarget ? 'OPEN' : 'idle'))

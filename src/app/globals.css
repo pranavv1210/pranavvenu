@@ -310,7 +310,7 @@ html[data-theme='light'] .text-outline {
 
 .project-visual {
   position: relative;
-  min-height: 18rem;
+  min-height: 19.5rem;
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--surface);
@@ -319,6 +319,13 @@ html[data-theme='light'] .text-outline {
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: auto, 28px 28px, 28px 28px;
+  transition: border-color 200ms ease, transform 200ms ease, background 200ms ease;
+}
+
+.project-row:hover .project-visual,
+.project-visual:hover {
+  border-color: color-mix(in srgb, var(--accent) 52%, transparent);
+  transform: translateY(-1px);
 }
 
 .visual-topbar {
@@ -335,77 +342,111 @@ html[data-theme='light'] .text-outline {
   background: var(--muted);
 }
 
+.project-visual-copy {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 3.4rem;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.project-visual-copy strong {
+  max-width: 14rem;
+  color: var(--text);
+  font-size: 0.72rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.project-visual-copy span {
+  max-width: 17rem;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.58rem;
+  line-height: 1.5;
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
 .project-system-svg {
   position: absolute;
-  inset: 3.15rem 1.2rem 1.2rem;
+  inset: 4.5rem 1.2rem 2.85rem;
   width: calc(100% - 2.4rem);
-  height: calc(100% - 4.35rem);
+  height: calc(100% - 7.35rem);
+  overflow: visible;
 }
 
 .project-system-path {
   fill: none;
-  stroke-width: 0.9;
+  stroke: var(--accent);
+  stroke-width: 0.74;
+  stroke-opacity: 0.62;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 90;
-  stroke-dashoffset: 90;
+  stroke-dasharray: 110;
+  stroke-dashoffset: 110;
+  filter: drop-shadow(0 0 10px var(--shadow-accent));
   animation: drawPath 1.5s ease forwards, pulsePath 3.8s ease-in-out infinite;
   animation-delay: calc(var(--i) * 0.16s), calc(1.5s + var(--i) * 0.16s);
 }
 
-.project-system-node rect {
-  fill: color-mix(in srgb, var(--bg) 84%, transparent);
-  stroke: color-mix(in srgb, var(--accent) 48%, transparent);
-  stroke-width: 0.32;
+.project-system-node {
+  transition: transform 220ms ease;
 }
 
-.project-system-node text {
+.project-system-node circle {
+  fill: color-mix(in srgb, var(--bg) 88%, transparent);
+  stroke: color-mix(in srgb, var(--accent) 58%, transparent);
+  stroke-width: 0.46;
+}
+
+.project-system-node .project-node-label {
   fill: var(--text);
   font-family: var(--font-geist-mono), monospace;
-  font-size: 2px;
+  font-size: 2.55px;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
 }
 
-.visual-stage {
-  position: absolute;
-  inset: 2.8rem 0 0;
-  background:
-    radial-gradient(circle at 24% 40%, var(--shadow-accent), transparent 11rem),
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: auto, 28px 28px, 28px 28px;
-}
-
-.visual-node {
-  position: absolute;
-  left: calc(11% + var(--i) * 21%);
-  top: calc(28% + (var(--i) % 2) * 28%);
-  min-width: 5rem;
-  border: 1px solid rgba(125, 226, 209, 0.28);
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  padding: 0.75rem;
+.project-system-node .project-node-detail {
+  fill: var(--muted);
   font-family: var(--font-geist-mono), monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  color: var(--text);
-  text-align: center;
-  animation: drift 4s ease-in-out infinite;
-  animation-delay: calc(var(--i) * -0.4s);
+  font-size: 1.85px;
+  letter-spacing: 0.08em;
 }
 
-.visual-node::after {
-  content: '';
+.project-row:hover .project-system-node {
+  animation: nodeFloat 2.8s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.18s);
+}
+
+.project-visual-metrics {
   position: absolute;
-  left: 100%;
-  top: 50%;
-  width: 4.5rem;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(125, 226, 209, 0.45), transparent);
+  left: 1rem;
+  right: 1rem;
+  bottom: 0.9rem;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
 }
 
-.visual-node:last-of-type::after {
-  display: none;
+.project-visual-metrics span {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  padding: 0.38rem 0.48rem;
+  color: var(--secondary);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.58rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .visual-scanline {
@@ -707,23 +748,40 @@ html[data-theme='light'] .text-outline {
   50% { opacity: 1; }
 }
 
+@keyframes nodeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.6px); }
+}
+
 @media (max-width: 640px) {
   .photo-frame {
     min-height: 24rem;
   }
 
-  .visual-node {
-    left: 12%;
-    right: 12%;
-    top: calc(11% + var(--i) * 20%);
+  .project-visual {
+    min-height: 22rem;
   }
 
-  .visual-node::after {
-    left: 50%;
-    top: 100%;
-    width: 1px;
-    height: 2.8rem;
-    background: linear-gradient(180deg, rgba(125, 226, 209, 0.45), transparent);
+  .project-visual-copy {
+    display: block;
+  }
+
+  .project-visual-copy span {
+    display: block;
+    margin-top: 0.45rem;
+    text-align: left;
+  }
+
+  .project-system-svg {
+    inset: 6rem 0.55rem 3.2rem;
+    width: calc(100% - 1.1rem);
+    height: calc(100% - 9.2rem);
+  }
+
+  .project-visual-metrics {
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
   }
 
   .system-node-0 { left: 35%; top: 8%; }
