@@ -7,6 +7,7 @@ const responses: Record<string, string> = {
   whoami: 'builder',
   focus: 'AI / systems / products',
   status: 'building',
+  email: 'mailto: pranavv736@gmail.com',
   ship: 'from idea -> system -> product',
 }
 

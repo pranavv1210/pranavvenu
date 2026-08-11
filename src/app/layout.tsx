@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     images: ['/logo512.png'],
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }, { url: '/favicon.ico' }],
     apple: '/logo192.png',
   },
 }
@@ -47,7 +47,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} ${geistMono.variable} scroll-smooth`}>
+    <html lang="en" data-theme="dark" className={`${geist.variable} ${geistMono.variable} scroll-smooth`}>
       <body>{children}</body>
     </html>
   )

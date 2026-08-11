@@ -48,7 +48,9 @@ export default function ParticleField() {
     }
 
     const drawGrid = () => {
-      context.strokeStyle = 'rgba(255,255,255,0.026)'
+      const styles = getComputedStyle(document.documentElement)
+      const gridColor = styles.getPropertyValue('--grid-line').trim() || 'rgba(255,255,255,0.026)'
+      context.strokeStyle = gridColor
       context.lineWidth = 1
       const step = 56
       for (let x = 0; x <= width; x += step) {
@@ -68,6 +70,8 @@ export default function ParticleField() {
     const tick = () => {
       context.clearRect(0, 0, width, height)
       drawGrid()
+      const styles = getComputedStyle(document.documentElement)
+      const accent = styles.getPropertyValue('--accent').trim() || '#7de2d1'
 
       for (let i = 0; i < particles.length; i += 1) {
         const p = particles[i]
@@ -87,8 +91,10 @@ export default function ParticleField() {
 
         context.beginPath()
         context.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        context.fillStyle = 'rgba(125,226,209,0.35)'
+        context.fillStyle = accent
+        context.globalAlpha = 0.35
         context.fill()
+        context.globalAlpha = 1
 
         for (let j = i + 1; j < particles.length; j += 1) {
           const q = particles[j]
@@ -97,8 +103,10 @@ export default function ParticleField() {
             context.beginPath()
             context.moveTo(p.x, p.y)
             context.lineTo(q.x, q.y)
-            context.strokeStyle = `rgba(156,203,255,${0.11 - distance / 1400})`
+            context.strokeStyle = accent
+            context.globalAlpha = Math.max(0.02, 0.11 - distance / 1400)
             context.stroke()
+            context.globalAlpha = 1
           }
         }
       }
@@ -113,6 +121,8 @@ export default function ParticleField() {
 
     resize()
     tick()
+    const observer = new MutationObserver(() => resize())
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
     window.addEventListener('resize', resize)
     window.addEventListener('pointermove', onPointer)
 
@@ -120,6 +130,7 @@ export default function ParticleField() {
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', resize)
       window.removeEventListener('pointermove', onPointer)
+      observer.disconnect()
     }
   }, [])
 

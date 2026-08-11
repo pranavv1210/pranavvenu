@@ -14,13 +14,13 @@ export default function Work() {
       <div className="section-kicker">01 / Work</div>
       <div className="section-heading">
         <h2>
-          Things
+          Working
           <br />
-          I shipped.
+          builds.
         </h2>
         <p>
-          A curated set of builds that show product thinking, AI systems, mobile workflows, data pipelines, and
-          front-end execution.
+          Real, repo-backed projects with live surfaces where available. Each one is presented as a working system, not
+          a static card.
         </p>
       </div>
 

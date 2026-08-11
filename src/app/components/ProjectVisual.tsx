@@ -7,6 +7,8 @@ const labels: Record<Project['visual'], string[]> = {
   frame: ['PHOTO', 'MODE', 'RENDER', 'SHARE'],
   document: ['PARSE', 'SCORE', 'EXPLAIN', 'REVIEW'],
   signal: ['INPUT', 'FILTER', 'MODEL', 'OUTPUT'],
+  city: ['CCTV', 'DETECT', 'TRACK', 'ALERT'],
+  fitness: ['PLAN', 'HYDRATE', 'METRICS', 'PROGRESS'],
 }
 
 export default function ProjectVisual({ project }: { project: Project }) {

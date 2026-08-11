@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FiMenu, FiX } from 'react-icons/fi'
+import ThemeToggle from '../effects/ThemeToggle'
 
 const navItems = [
   { label: '01 / Work', href: '/#work' },
@@ -31,9 +32,12 @@ export default function Navigation() {
           ))}
         </div>
 
-        <div className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted md:flex">
-          <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_16px_rgba(125,226,209,0.9)]" />
-          System / Ready
+        <div className="hidden items-center gap-3 md:flex">
+          <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_16px_rgba(125,226,209,0.9)]" />
+            System / Ready
+          </div>
+          <ThemeToggle />
         </div>
 
         <button
@@ -65,6 +69,9 @@ export default function Navigation() {
                 {item.label}
               </a>
             ))}
+            <div className="pt-4">
+              <ThemeToggle />
+            </div>
           </motion.div>
         ) : null}
       </AnimatePresence>

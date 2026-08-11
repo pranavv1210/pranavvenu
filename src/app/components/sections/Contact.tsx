@@ -16,7 +16,7 @@ export default function Contact() {
             something.
           </h2>
           <p className="mt-8 max-w-xl text-lg text-secondary">Have an idea, need a builder, or want to collaborate on an AI/product system?</p>
-          <a href={`mailto:${profile.email}`} className="button-primary mt-8 inline-flex" data-cursor="OPEN">
+          <a href={profile.contactHref} className="button-primary mt-8 inline-flex" data-cursor="idle">
             Start a conversation <FiArrowUpRight />
           </a>
         </div>
@@ -25,7 +25,7 @@ export default function Contact() {
           <div className="grid gap-3">
             <a className="contact-link" href={profile.github} target="_blank" rel="noreferrer" data-cursor="OPEN"><FiGithub /> GitHub</a>
             <a className="contact-link" href={profile.linkedin} target="_blank" rel="noreferrer" data-cursor="OPEN"><FiLinkedin /> LinkedIn</a>
-            <a className="contact-link" href={`mailto:${profile.email}`} data-cursor="OPEN"><FiMail /> Email</a>
+            <a className="contact-link" href={profile.contactHref} data-cursor="idle"><FiMail /> Email</a>
             <a className="contact-link" href={`tel:${profile.phone}`} data-cursor="OPEN"><FiPhone /> Phone</a>
             <a className="contact-link" href={profile.resume} data-cursor="OPEN">Resume <FiArrowUpRight /></a>
           </div>

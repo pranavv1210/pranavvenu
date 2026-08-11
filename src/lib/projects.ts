@@ -2,11 +2,14 @@ export type ArchitectureNode = {
   id: string
   label: string
   sublabel?: string
+  x?: number
+  y?: number
 }
 
 export type ArchitectureFlow = {
   label: string
   nodes: ArchitectureNode[]
+  links?: Array<[string, string]>
 }
 
 export type Project = {
@@ -27,7 +30,7 @@ export type Project = {
   github?: string
   liveUrl?: string
   featured: boolean
-  visual: 'route' | 'water' | 'editor' | 'frame' | 'document' | 'signal'
+  visual: 'route' | 'water' | 'editor' | 'frame' | 'document' | 'signal' | 'city' | 'fitness'
   architecture: ArchitectureFlow
 }
 
@@ -51,52 +54,55 @@ export const projects: Project[] = [
       'A product-shaped build that turns a messy travel workflow into a coordinated rider operating layer.',
     stack: ['Flutter', 'Supabase', 'Maps', 'Auth', 'Realtime data'],
     highlights: ['Phone/Gmail auth flows', 'Ride lobbies', 'Nearby ride alerts', 'Live ride tracking', 'SOS sharing'],
-    github: 'https://github.com/pranavv1210/journeysync-app',
-    liveUrl: 'https://journeysync-app.vercel.app/',
+    github: 'https://github.com/pranavv1210/JourneySync-App',
+    liveUrl: 'https://journeysyncrideapp.in/',
     featured: true,
     visual: 'route',
     architecture: {
       label: 'Ride signal path',
       nodes: [
-        { id: '01', label: 'RIDER', sublabel: 'identity' },
-        { id: '02', label: 'RIDE', sublabel: 'intent' },
-        { id: '03', label: 'ROUTE', sublabel: 'map' },
-        { id: '04', label: 'GROUP', sublabel: 'lobby' },
-        { id: '05', label: 'LIVE', sublabel: 'coordination' },
+        { id: '01', label: 'RIDER', sublabel: 'identity', x: 12, y: 52 },
+        { id: '02', label: 'RIDE', sublabel: 'intent', x: 33, y: 30 },
+        { id: '03', label: 'ROUTE', sublabel: 'map', x: 54, y: 52 },
+        { id: '04', label: 'GROUP', sublabel: 'lobby', x: 74, y: 30 },
+        { id: '05', label: 'LIVE', sublabel: 'coordination', x: 88, y: 52 },
       ],
+      links: [['01', '02'], ['02', '03'], ['03', '04'], ['04', '05'], ['03', '05']],
     },
   },
   {
     id: 'PROJECT 02',
-    slug: 'ai-resume-screening',
-    name: 'AI Resume Screening System',
-    shortName: 'Recruitment Intelligence',
-    category: 'AI / NLP / Full-stack',
+    slug: 'ai-hiring-os',
+    name: 'AI Hiring OS',
+    shortName: 'Recruiting Operating System',
+    category: 'AI Agents / HRMS / Full-stack',
     year: '2026',
-    status: 'Ongoing',
-    role: 'AI workflow, full-stack web app, candidate chatbot',
+    status: 'Working live build',
+    role: 'AI recruiting workflows, product architecture, full-stack implementation',
     description:
-      'A recruitment web app for resume parsing, semantic job matching, explainable scoring, and candidate feedback.',
+      'A multi-tenant HRMS and AI-powered recruiting platform with resume scoring, adaptive voice interviews, payroll automation, and a recruiter copilot.',
     problem:
-      'Recruiters need structured candidate comparison, while applicants rarely get useful feedback before submission.',
+      'Hiring teams need one place for parsing, scoring, interviews, employee workflows, notifications, and recruiter decision support.',
     solution:
-      'A React and Node system using Hugging Face, spaCy, Supabase, Auth.js, and Rasa Open Source to parse resumes, match jobs, and power a feedback chatbot.',
+      'A productized hiring OS that combines automated resume parsing/scoring, voice interview intelligence, employee review hubs, payroll workflows, and a tool-calling copilot.',
     outcome:
-      'A practical AI product surface that connects NLP scoring with HR collaboration and candidate-facing guidance.',
-    stack: ['React', 'Node.js', 'Express', 'Hugging Face', 'spaCy', 'Supabase', 'Auth.js', 'Rasa'],
-    highlights: ['Resume parsing', 'Semantic matching', 'Explainable scores', 'Candidate chatbot', 'HR review tools'],
-    github: 'https://github.com/pranavv1210/AI-Driven-Resume-Screening',
+      'A stronger, working product surface for showing applied AI, business workflows, and system design together.',
+    stack: ['LLMs', 'AI agents', 'Machine Learning', 'Recruitment', 'HRMS', 'Voice analytics'],
+    highlights: ['Resume parsing/scoring', 'Adaptive voice interviews', 'Attendance-linked payroll', 'Recruiter Copilot', 'Real-time notifications'],
+    github: 'https://github.com/pranavv1210/AI-Hiring-OS',
+    liveUrl: 'https://ai-hiring-os.vercel.app',
     featured: true,
     visual: 'document',
     architecture: {
-      label: 'Candidate evaluation pipeline',
+      label: 'Recruiting intelligence loop',
       nodes: [
-        { id: '01', label: 'RESUME', sublabel: 'input' },
-        { id: '02', label: 'PARSER', sublabel: 'NLP' },
-        { id: '03', label: 'MATCH', sublabel: 'score' },
-        { id: '04', label: 'CHATBOT', sublabel: 'feedback' },
-        { id: '05', label: 'HR', sublabel: 'decision' },
+        { id: '01', label: 'RESUME', sublabel: 'parse', x: 12, y: 50 },
+        { id: '02', label: 'SCORE', sublabel: 'rank', x: 32, y: 28 },
+        { id: '03', label: 'VOICE', sublabel: 'interview', x: 54, y: 50 },
+        { id: '04', label: 'COPILOT', sublabel: 'tools', x: 74, y: 28 },
+        { id: '05', label: 'HRMS', sublabel: 'action', x: 88, y: 50 },
       ],
+      links: [['01', '02'], ['02', '03'], ['03', '04'], ['04', '05'], ['02', '04']],
     },
   },
   {
@@ -106,7 +112,7 @@ export const projects: Project[] = [
     shortName: 'Mobile Heart Sound Classifier',
     category: 'Mobile AI / Deep Learning',
     year: '2026',
-    status: 'Prototype',
+    status: 'Working demo',
     role: 'Signal preprocessing, model integration, mobile-first inference',
     description:
       'A mobile-first heart sound classifier for normal versus abnormal phonocardiogram recordings.',
@@ -119,113 +125,158 @@ export const projects: Project[] = [
     stack: ['Python', 'TensorFlow Lite', 'EfficientNet-B0', 'Audio DSP', 'Mel spectrograms'],
     highlights: ['Bandpass filtering', 'Wavelet denoising', 'Amplitude normalization', 'Silence trimming', 'Thresholded inference'],
     github: 'https://github.com/pranavv1210/cardio-guard',
+    liveUrl: 'https://cardioguardai.streamlit.app/',
     featured: true,
     visual: 'signal',
     architecture: {
       label: 'Inference pipeline',
       nodes: [
-        { id: '01', label: 'AUDIO', sublabel: '2kHz mono' },
-        { id: '02', label: 'CLEAN', sublabel: 'DSP' },
-        { id: '03', label: 'MEL', sublabel: '128x128' },
-        { id: '04', label: 'MODEL', sublabel: 'EfficientNet' },
-        { id: '05', label: 'RESULT', sublabel: 'threshold' },
+        { id: '01', label: 'AUDIO', sublabel: '2kHz mono', x: 10, y: 52 },
+        { id: '02', label: 'FILTER', sublabel: 'DSP', x: 30, y: 30 },
+        { id: '03', label: 'MEL', sublabel: '128x128', x: 50, y: 52 },
+        { id: '04', label: 'CNN', sublabel: 'EfficientNet', x: 70, y: 30 },
+        { id: '05', label: 'RISK', sublabel: 'threshold', x: 88, y: 52 },
       ],
+      links: [['01', '02'], ['02', '03'], ['03', '04'], ['04', '05']],
     },
   },
   {
     id: 'PROJECT 04',
-    slug: 'terms-summarizer',
-    name: 'Terms & Conditions Summarizer',
-    shortName: 'Readable Legal Automation',
-    category: 'Automation / GenAI',
+    slug: 'operation-gridlock',
+    name: 'Operation Gridlock',
+    shortName: 'Vehicle Tracking Intelligence',
+    category: 'Computer Vision / Geospatial AI',
     year: '2026',
-    status: 'Prototype',
-    role: 'Workflow design, scraping, retrieval, summarization',
+    status: 'Working live build',
+    role: 'Computer vision pipeline, geospatial prediction, AI product interface',
     description:
-      'An n8n and Flask workflow that turns long legal documents into plain-language summaries from a URL.',
+      'An AI-powered urban security intelligence platform for real-time suspect vehicle tracking using computer vision and geospatial prediction.',
     problem:
-      'Most users skip dense terms and policies because the important clauses are buried in long legal text.',
+      'Citywide CCTV investigations need a faster way to isolate a target vehicle, restore poor footage, forecast likely movement, and generate actionable alerts.',
     solution:
-      'A modular workflow extracts, cleans, indexes, and summarizes terms content with Hugging Face Transformers, FAISS, and BeautifulSoup.',
+      'A vehicle intelligence workflow that combines CCTV ingestion, detection/segmentation, restoration, route forecasting, and geo-coordinate alerting.',
     outcome:
-      'A focused automation experiment that improves transparency for legal and long-form document reading.',
-    stack: ['Python', 'n8n', 'Flask', 'Hugging Face', 'FAISS', 'BeautifulSoup'],
-    highlights: ['URL ingestion', 'Content cleaning', 'Vector retrieval', 'Plain-language summaries', 'Reusable workflow'],
+      'A cinematic AI systems project that demonstrates computer vision, real-time tracking, prediction, and public-safety product thinking.',
+    stack: ['Python', 'Computer Vision', 'Geospatial prediction', 'Segmentation', 'Real-time tracking'],
+    highlights: ['Vehicle detection', 'CCTV intelligence', 'Visual restoration', 'Route prediction', 'Geo-coordinate alerts'],
+    github: 'https://github.com/pranavv1210/gridlock-vehicle-tracking',
+    liveUrl: 'https://gridlock-vehicle-tracking.vercel.app/',
     featured: true,
-    visual: 'document',
+    visual: 'city',
     architecture: {
-      label: 'Document compression route',
+      label: 'Vehicle pursuit flow',
       nodes: [
-        { id: '01', label: 'URL', sublabel: 'source' },
-        { id: '02', label: 'EXTRACT', sublabel: 'clean' },
-        { id: '03', label: 'INDEX', sublabel: 'FAISS' },
-        { id: '04', label: 'MODEL', sublabel: 'summary' },
-        { id: '05', label: 'USER', sublabel: 'readable' },
+        { id: '01', label: 'CCTV', sublabel: 'feed', x: 10, y: 50 },
+        { id: '02', label: 'DETECT', sublabel: 'vehicle', x: 30, y: 28 },
+        { id: '03', label: 'RESTORE', sublabel: 'clarity', x: 50, y: 50 },
+        { id: '04', label: 'FORECAST', sublabel: 'route', x: 70, y: 28 },
+        { id: '05', label: 'ALERT', sublabel: 'GPS', x: 88, y: 50 },
       ],
+      links: [['01', '02'], ['02', '03'], ['03', '04'], ['04', '05'], ['02', '04']],
     },
   },
   {
     id: 'PROJECT 05',
-    slug: 'student-mental-health-sql',
-    name: 'Student Mental Health SQL Analysis',
-    shortName: 'Analytical Data Pipeline',
-    category: 'Data / SQL / Python',
-    year: '2025',
-    status: 'Completed',
-    role: 'Schema design, SQL analysis, Python ETL, visualization',
+    slug: 'workstate',
+    name: 'WorkState',
+    shortName: 'VS Code Context Bridge',
+    category: 'Developer Tooling / AI Workflow',
+    year: '2026',
+    status: 'Working extension',
+    role: 'VS Code extension design, local-first workflow, AI context systems',
     description:
-      'A data analysis pipeline for student demographics and self-reported mental health scores.',
+      'A local-first engineering context layer for AI coding sessions in VS Code.',
     problem:
-      'Survey data needs structure before trends across gender, treatment-seeking status, and year of study become visible.',
+      'AI coding sessions lose useful project context, decisions, tasks, and local workflow state across edits.',
     solution:
-      'A normalized MySQL schema, complex SQL queries with CTEs and conditional aggregation, and Python/Pandas visual analysis.',
+      'A VS Code extension that captures local engineering context and exposes it as a clearer bridge between the editor, state, and AI-assisted work.',
     outcome:
-      'A clear analytical workflow moving from raw survey data into explainable charts and comparisons.',
-    stack: ['Python', 'MySQL', 'Pandas', 'Matplotlib', 'Seaborn'],
-    highlights: ['Normalized schema', 'CTEs', 'Conditional aggregation', 'ETL script', 'Data visualization'],
+      'A practical devtool build that shows product thinking around how engineers actually work with AI inside an editor.',
+    stack: ['TypeScript', 'VS Code Extension API', 'Local-first state', 'Developer tooling'],
+    highlights: ['Editor-native workflow', 'Local project context', 'AI session bridge', 'Marketplace distribution'],
+    github: 'https://github.com/pranavv1210/workstate',
+    liveUrl: 'https://marketplace.visualstudio.com/items?itemName=pranavv1210.workstate',
     featured: false,
-    visual: 'signal',
+    visual: 'editor',
     architecture: {
-      label: 'Analysis pipeline',
+      label: 'Editor context bridge',
       nodes: [
-        { id: '01', label: 'SURVEY', sublabel: 'raw' },
-        { id: '02', label: 'SCHEMA', sublabel: 'SQL' },
-        { id: '03', label: 'QUERY', sublabel: 'CTE' },
-        { id: '04', label: 'ETL', sublabel: 'Pandas' },
-        { id: '05', label: 'CHARTS', sublabel: 'insight' },
+        { id: '01', label: 'EDITOR', sublabel: 'VS Code', x: 12, y: 50 },
+        { id: '02', label: 'STATE', sublabel: 'local', x: 32, y: 28 },
+        { id: '03', label: 'CONTEXT', sublabel: 'project', x: 52, y: 50 },
+        { id: '04', label: 'AI', sublabel: 'session', x: 72, y: 28 },
+        { id: '05', label: 'ACTION', sublabel: 'ship', x: 88, y: 50 },
       ],
+      links: [['01', '02'], ['02', '03'], ['03', '04'], ['04', '05'], ['03', '05']],
     },
   },
   {
     id: 'PROJECT 06',
-    slug: 'revivemotion',
-    name: 'ReviveMotion',
-    shortName: 'Cancer Rehab Monitoring',
-    category: 'Computer Vision / Hackathon',
+    slug: 'frame-your-goa',
+    name: 'Frame Your Goa',
+    shortName: 'Generative Event Graphics',
+    category: 'Creative Technology / Graphics',
     year: '2026',
-    status: 'Hackathon build',
-    role: 'AI and computer vision web platform contributor',
+    status: 'Working live build',
+    role: 'Frontend, graphics workflow, interaction and export experience',
     description:
-      'A markerless cancer rehabilitation monitoring platform built during VYUHATECH 2.0.',
+      'A creative technology web experience that turns photos into shareable HH Goa 2026 event frames.',
     problem:
-      'Rehabilitation exercises need accessible movement monitoring without requiring specialized markers or hardware.',
+      'Event communities need a fast, polished way to create branded visual artifacts without design tooling.',
     solution:
-      'A web platform concept using AI and computer vision for real-time markerless rehab movement analysis.',
+      'A browser-based graphics flow that takes a photo, applies a selected frame mode, renders the final artifact, and prepares it for sharing.',
     outcome:
-      'A competition build demonstrating applied computer vision for healthcare-adjacent workflows.',
-    stack: ['Computer Vision', 'AI', 'Web platform', 'Real-time analysis'],
-    highlights: ['Markerless tracking', 'Rehab workflow', 'Hackathon execution', 'AI-assisted monitoring'],
+      'A strong proof of visual systems, canvas-style rendering, interaction design, and product polish.',
+    stack: ['Next.js', 'TypeScript', 'Graphics rendering', 'Vercel'],
+    highlights: ['Photo upload', 'Frame modes', 'Generated artifact', 'Share/export flow'],
+    github: 'https://github.com/pranavv1210/frame-your-goa',
+    liveUrl: 'https://frame-your-goa-iota.vercel.app',
     featured: false,
-    visual: 'signal',
+    visual: 'frame',
     architecture: {
-      label: 'Motion analysis flow',
+      label: 'Graphics render pipeline',
       nodes: [
-        { id: '01', label: 'CAMERA', sublabel: 'input' },
-        { id: '02', label: 'POSE', sublabel: 'vision' },
-        { id: '03', label: 'MOTION', sublabel: 'track' },
-        { id: '04', label: 'ANALYZE', sublabel: 'AI' },
-        { id: '05', label: 'FEEDBACK', sublabel: 'rehab' },
+        { id: '01', label: 'PHOTO', sublabel: 'input', x: 12, y: 50 },
+        { id: '02', label: 'MODE', sublabel: 'select', x: 32, y: 28 },
+        { id: '03', label: 'FRAME', sublabel: 'compose', x: 52, y: 50 },
+        { id: '04', label: 'RENDER', sublabel: 'PNG', x: 72, y: 28 },
+        { id: '05', label: 'SHARE', sublabel: 'artifact', x: 88, y: 50 },
       ],
+      links: [['01', '02'], ['02', '03'], ['03', '04'], ['04', '05']],
+    },
+  },
+  {
+    id: 'PROJECT 07',
+    slug: 'aquaflow',
+    name: 'AquaFlow',
+    shortName: 'Water Tanker OS',
+    category: 'Mobile / Operations',
+    year: '2026',
+    status: 'Working app',
+    role: 'Flutter app architecture, Supabase backend, product workflows',
+    description:
+      'A production-ready Flutter app for managing a water tanker supply business with Supabase, Riverpod, and Material 3.',
+    problem:
+      'Water tanker operations need cleaner handling for orders, dispatch, customers, drivers, delivery state, and payments.',
+    solution:
+      'A mobile operating system for water delivery workflows, connecting customer demand to dispatch and delivery tracking.',
+    outcome:
+      'A mobile product build that makes an offline-heavy logistics workflow feel structured and manageable.',
+    stack: ['Flutter', 'Supabase', 'Riverpod', 'Material 3', 'Operations'],
+    highlights: ['Order management', 'Dispatch flow', 'Customer records', 'Delivery status', 'Mobile-first UI'],
+    github: 'https://github.com/pranavv1210/aquaflow',
+    featured: false,
+    visual: 'water',
+    architecture: {
+      label: 'Delivery operations flow',
+      nodes: [
+        { id: '01', label: 'CUSTOMER', sublabel: 'order', x: 12, y: 50 },
+        { id: '02', label: 'DISPATCH', sublabel: 'assign', x: 32, y: 28 },
+        { id: '03', label: 'TANKER', sublabel: 'driver', x: 52, y: 50 },
+        { id: '04', label: 'DELIVERY', sublabel: 'status', x: 72, y: 28 },
+        { id: '05', label: 'PAYMENT', sublabel: 'close', x: 88, y: 50 },
+      ],
+      links: [['01', '02'], ['02', '03'], ['03', '04'], ['04', '05']],
     },
   },
 ]
