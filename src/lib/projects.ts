@@ -30,7 +30,7 @@ export type Project = {
   github?: string
   liveUrl?: string
   featured: boolean
-  visual: 'route' | 'water' | 'editor' | 'frame' | 'document' | 'signal' | 'city' | 'fitness'
+  visual: 'route' | 'water' | 'editor' | 'frame' | 'signal' | 'city' | 'fitness'
   architecture: ArchitectureFlow
 }
 

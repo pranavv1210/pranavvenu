@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion'
 import { FiArrowDownRight, FiDownload } from 'react-icons/fi'
 import { profile } from '@/lib/profile'
@@ -58,13 +57,13 @@ export default function Hero() {
                 Identity image
               </div>
               {photoLoaded ? (
-                <Image
+                // Use a normal image so Vercel serves the portrait directly from /public/photo.png.
+                // This avoids optimizer cache issues when the user replaces the file.
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
                   src="/photo.png"
                   alt="Portrait of Pranav V."
-                  fill
-                  sizes="(max-width: 768px) 92vw, 38vw"
-                  className="object-cover grayscale contrast-110"
-                  priority
+                  className="absolute inset-0 h-full w-full object-cover object-center grayscale contrast-110"
                   onError={() => setPhotoLoaded(false)}
                 />
               ) : (
