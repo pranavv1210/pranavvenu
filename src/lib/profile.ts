@@ -40,10 +40,8 @@ export const profile = {
     'AWS',
   ],
   achievements: [
-    '2nd place, National Level Deep Learning Hackathon by BGSIT',
     'Patent filed for an AI-powered pet monitoring system using computer vision',
     'CMRIT hackathon participant across Gen AI, Ops-Fusion, and Vyuhatech 2.0',
-    'Member of Cybernauts AI/ML Club',
   ],
   education: [
     {
