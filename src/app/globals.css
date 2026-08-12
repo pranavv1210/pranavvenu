@@ -235,7 +235,9 @@ html[data-theme='light'] .text-outline {
 
 .photo-frame {
   position: relative;
-  min-height: 28rem;
+  width: min(100%, 30rem);
+  min-height: clamp(28rem, 58vh, 44rem);
+  margin-left: auto;
   overflow: hidden;
   border: 1px solid var(--border);
   background: linear-gradient(145deg, var(--surface-raised), var(--bg));
@@ -325,7 +327,7 @@ html[data-theme='light'] .text-outline {
 .project-row:hover .project-visual,
 .project-visual:hover {
   border-color: color-mix(in srgb, var(--accent) 52%, transparent);
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .visual-topbar {
@@ -440,11 +442,6 @@ html[data-theme='light'] .text-outline {
   font-family: var(--font-geist-mono), monospace;
   font-size: 1.85px;
   letter-spacing: 0.08em;
-}
-
-.project-row:hover .project-system-node {
-  animation: nodeFloat 2.8s ease-in-out infinite;
-  animation-delay: calc(var(--i) * -0.18s);
 }
 
 .project-visual-metrics {
@@ -740,30 +737,12 @@ html[data-theme='light'] .text-outline {
   opacity: 0.75;
 }
 
-.website-card::after {
-  content: '';
-  position: absolute;
-  left: 1.1rem;
-  right: 1.1rem;
-  top: 48%;
-  height: 1px;
-  transform: scaleX(0.24);
-  transform-origin: left;
-  background: linear-gradient(90deg, var(--accent), transparent);
-  transition: transform 240ms ease;
-}
-
 .website-card:hover,
 .website-card:focus-visible {
   transform: translateY(-2px);
   background:
     radial-gradient(circle at 70% 18%, var(--shadow-accent), transparent 10rem),
     color-mix(in srgb, var(--surface) 86%, transparent);
-}
-
-.website-card:hover::after,
-.website-card:focus-visible::after {
-  transform: scaleX(1);
 }
 
 .website-card > * {
@@ -974,14 +953,11 @@ html[data-theme='light'] .text-outline {
   50% { opacity: 1; }
 }
 
-@keyframes nodeFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-1.6px); }
-}
-
 @media (max-width: 640px) {
   .photo-frame {
+    width: 100%;
     min-height: 24rem;
+    margin-left: 0;
   }
 
   .project-visual {

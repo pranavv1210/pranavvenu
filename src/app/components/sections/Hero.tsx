@@ -32,7 +32,7 @@ export default function Hero() {
           <span>Build: portfolio v2</span>
         </div>
 
-        <div className="relative grid items-center gap-10 py-10 lg:grid-cols-[1.08fr_0.92fr]">
+        <div className="relative grid items-center gap-10 py-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(22rem,0.72fr)]">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -49,7 +49,7 @@ export default function Hero() {
 
           <motion.div
             style={reduceMotion ? undefined : { x, y }}
-            className="relative z-10 justify-self-stretch lg:justify-self-end"
+            className="relative z-10 w-full justify-self-stretch lg:justify-self-end"
             data-cursor="EXPLORE"
           >
             <div className="photo-frame">
