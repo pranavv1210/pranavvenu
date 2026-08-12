@@ -10,7 +10,7 @@ export default function Lab() {
 
   return (
     <section id="lab" className="section-shell">
-      <div className="section-kicker">04 / Working experiments</div>
+      <div className="section-kicker">05 / Working experiments</div>
       <div className="section-heading">
         <h2>Active builds.</h2>
         <p>Smaller but still real systems: editor tooling, creative graphics, mobile operations, and hackathon-grade AI workflows.</p>

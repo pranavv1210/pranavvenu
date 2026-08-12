@@ -6,7 +6,7 @@ import { profile } from '@/lib/profile'
 export default function About() {
   return (
     <section id="about" className="section-shell">
-      <div className="section-kicker">03 / About</div>
+      <div className="section-kicker">04 / About</div>
       <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <h2 className="max-w-4xl text-4xl font-black uppercase leading-[0.95] text-text md:text-7xl">

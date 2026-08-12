@@ -592,6 +592,208 @@ html[data-theme='light'] .text-outline {
   font-size: 1.8px;
 }
 
+.websites-hero {
+  display: grid;
+  gap: 2rem;
+  align-items: stretch;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 900px) {
+  .websites-hero {
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+}
+
+.websites-hero h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(3.8rem, 10vw, 8.5rem);
+  font-weight: 900;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+
+.websites-hero p {
+  max-width: 45rem;
+  margin-top: 1.6rem;
+  color: var(--secondary);
+  font-size: 1.1rem;
+  line-height: 1.75;
+}
+
+.websites-offer-panel {
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 88% 10%, var(--shadow-accent), transparent 12rem),
+    var(--panel-bg);
+  padding: clamp(1.1rem, 3vw, 1.8rem);
+}
+
+.websites-offer-panel span {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.websites-offer-panel strong {
+  display: block;
+  border-top: 1px solid var(--border);
+  padding: 0.85rem 0;
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.websites-offer-panel a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.2rem;
+  border: 1px solid var(--border);
+  background: var(--text);
+  color: var(--bg);
+  padding: 0.9rem 1rem;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.websites-offer-panel a:hover,
+.websites-offer-panel a:focus-visible {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.website-grid {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--border);
+  background: var(--border);
+}
+
+@media (min-width: 760px) {
+  .website-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1180px) {
+  .website-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.website-card {
+  position: relative;
+  min-height: 19rem;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, var(--panel-soft), transparent),
+    color-mix(in srgb, var(--bg) 88%, transparent);
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.website-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(180deg, black, transparent 78%);
+  opacity: 0.75;
+}
+
+.website-card::after {
+  content: '';
+  position: absolute;
+  left: 1.1rem;
+  right: 1.1rem;
+  top: 48%;
+  height: 1px;
+  transform: scaleX(0.24);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  transition: transform 240ms ease;
+}
+
+.website-card:hover,
+.website-card:focus-visible {
+  transform: translateY(-2px);
+  background:
+    radial-gradient(circle at 70% 18%, var(--shadow-accent), transparent 10rem),
+    color-mix(in srgb, var(--surface) 86%, transparent);
+}
+
+.website-card:hover::after,
+.website-card:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.website-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.website-card-index {
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+}
+
+.website-card p {
+  margin: 0 0 0.9rem;
+  color: var(--accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.website-card h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.website-card span {
+  display: block;
+  margin-top: 1rem;
+  color: var(--secondary);
+  line-height: 1.55;
+}
+
+.website-card em {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  align-self: flex-start;
+  color: var(--accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-style: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 .system-node-0 { left: 42%; top: 9%; }
 .system-node-1 { right: 8%; top: 41%; }
 .system-node-2 { left: 7%; top: 41%; }

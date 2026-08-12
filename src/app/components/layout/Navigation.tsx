@@ -8,10 +8,11 @@ import ThemeToggle from '../effects/ThemeToggle'
 
 const navItems = [
   { label: '01 / Work', href: '/#work' },
-  { label: '02 / System', href: '/#system' },
-  { label: '03 / About', href: '/#about' },
-  { label: '04 / Lab', href: '/#lab' },
-  { label: '05 / Contact', href: '/#contact' },
+  { label: '02 / Websites', href: '/#websites' },
+  { label: '03 / System', href: '/#system' },
+  { label: '04 / About', href: '/#about' },
+  { label: '05 / Lab', href: '/#lab' },
+  { label: '06 / Contact', href: '/#contact' },
 ]
 
 export default function Navigation() {

@@ -9,7 +9,7 @@ export default function System() {
 
   return (
     <section id="system" className="section-shell">
-      <div className="section-kicker">02 / System</div>
+      <div className="section-kicker">03 / System</div>
       <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <h2 className="section-title">What I Build.</h2>

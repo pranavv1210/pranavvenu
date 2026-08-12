@@ -10,6 +10,7 @@ import Hero from './components/sections/Hero'
 import Journey from './components/sections/Journey'
 import Lab from './components/sections/Lab'
 import System from './components/sections/System'
+import Websites from './components/sections/Websites'
 import Work from './components/sections/Work'
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
       <Navigation />
       <Hero />
       <Work />
+      <Websites />
       <System />
       <About />
       <Lab />
