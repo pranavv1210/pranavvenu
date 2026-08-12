@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FiArrowLeft, FiExternalLink, FiGithub } from 'react-icons/fi'
 import Link from 'next/link'
@@ -8,17 +9,29 @@ import ParticleField from '@/app/components/effects/ParticleField'
 import ProjectVisual from '@/app/components/ProjectVisual'
 import { getProject, projects } from '@/lib/projects'
 
+const siteUrl = 'https://pranavvenu.vercel.app'
+
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }))
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const project = getProject(params.slug)
   if (!project) return {}
 
   return {
-    title: `${project.name} - Pranav V.`,
-    description: project.description,
+    title: `${project.name} by Pranav Venu`,
+    description: `${project.description} Built by Pranav Venu, AI/ML engineer and creative technologist from CMRIT Bengaluru.`,
+    alternates: {
+      canonical: `/work/${project.slug}`,
+    },
+    openGraph: {
+      title: `${project.name} by Pranav Venu`,
+      description: project.description,
+      url: `${siteUrl}/work/${project.slug}`,
+      siteName: 'Pranav Venu Portfolio',
+      type: 'article',
+    },
   }
 }
 

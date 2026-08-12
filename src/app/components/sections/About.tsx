@@ -14,13 +14,31 @@ export default function About() {
           </h2>
           <div className="mt-8 max-w-3xl space-y-5 text-lg leading-relaxed text-secondary">
             <p>
-              I am pursuing B.E. in Artificial Intelligence and Machine Learning at CMR Institute of Technology,
-              Bengaluru. My work sits between AI, full-stack engineering, mobile applications, automation, and data.
+              I am Pranav Venu, also shown as Pranav V., based in Bengaluru (Blore). I am pursuing B.E. in Artificial
+              Intelligence and Machine Learning at CMR Institute of Technology, Bengaluru. My work sits between AI,
+              full-stack engineering, mobile applications, automation, and data.
             </p>
             <p>
               The through-line is simple: understand the problem, build the system, test the behavior, and ship a usable
               product surface.
             </p>
+          </div>
+          <div className="mt-8">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.26em] text-accent">Resume skill index</h3>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {profile.resumeSkills.map((skill) => (
+                <span key={skill} className="tag">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            {profile.achievements.map((achievement) => (
+              <div key={achievement} className="border border-white/10 bg-bg/60 p-4 text-sm leading-relaxed text-secondary">
+                {achievement}
+              </div>
+            ))}
           </div>
         </motion.div>
 
@@ -29,7 +47,10 @@ export default function About() {
             ['Current mode', profile.status],
             ['Focus', profile.focus],
             ['Base', profile.location],
+            ['Search base', profile.localSearchLocation],
             ['Education', 'B.E. AI & ML / 2026'],
+            ['Institute', 'CMRIT Bengaluru'],
+            ['CGPA', '8.66'],
             ['Status', 'Experimenting'],
           ].map(([label, value]) => (
             <div key={label} className="flex items-start justify-between gap-6 border-b border-white/10 py-5 first:pt-0 last:border-b-0 last:pb-0">
