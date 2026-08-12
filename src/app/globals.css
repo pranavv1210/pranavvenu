@@ -382,25 +382,46 @@ html[data-theme='light'] .text-outline {
   overflow: visible;
 }
 
-.project-system-path {
+.project-system-line,
+.project-system-branch {
   fill: none;
   stroke: var(--accent);
-  stroke-width: 0.74;
-  stroke-opacity: 0.62;
+  stroke-width: 0.55;
+  stroke-opacity: 0.7;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 110;
-  stroke-dashoffset: 110;
-  filter: drop-shadow(0 0 10px var(--shadow-accent));
-  animation: drawPath 1.5s ease forwards, pulsePath 3.8s ease-in-out infinite;
-  animation-delay: calc(var(--i) * 0.16s), calc(1.5s + var(--i) * 0.16s);
+  stroke-dasharray: 42;
+  stroke-dashoffset: 42;
+  filter: drop-shadow(0 0 8px var(--shadow-accent));
+  animation: drawPath 0.9s ease forwards;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+.project-system-branch {
+  stroke-width: 0.44;
+  stroke-opacity: 0.42;
+  stroke-dasharray: 2 1.6;
+  stroke-dashoffset: 0;
+}
+
+.project-arrow-head {
+  fill: var(--accent);
+  opacity: 0.82;
+}
+
+.project-branch-label {
+  fill: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 2px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .project-system-node {
   transition: transform 220ms ease;
 }
 
-.project-system-node circle {
+.project-system-node rect {
   fill: color-mix(in srgb, var(--bg) 88%, transparent);
   stroke: color-mix(in srgb, var(--accent) 58%, transparent);
   stroke-width: 0.46;
@@ -546,9 +567,9 @@ html[data-theme='light'] .text-outline {
 .flow-line {
   fill: none;
   stroke: var(--accent);
-  stroke-width: 0.5;
-  stroke-opacity: 0.68;
-  stroke-dasharray: 1.8 1.3;
+  stroke-width: 0.55;
+  stroke-opacity: 0.72;
+  stroke-linecap: round;
 }
 
 .flow-arrow {
@@ -559,7 +580,7 @@ html[data-theme='light'] .text-outline {
 .flow-node-core {
   fill: var(--bg);
   stroke: var(--accent);
-  stroke-width: 0.34;
+  stroke-width: 0.4;
 }
 
 .flow-node-ring {
