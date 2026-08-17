@@ -60,7 +60,7 @@ export const profile = {
       year: '2020',
       label: '10th Grade - ICSE',
       meta: 'Cambridge School, Bengaluru',
-      detail: '81.8%',
+      detail: '85.8%',
     },
   ],
   experience: [
