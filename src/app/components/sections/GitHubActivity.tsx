@@ -133,7 +133,11 @@ function drawPulse({ ctx, w, h, t }: Frame, days: Day[]) {
   weekly.forEach((value, i) => {
     const x = pad + i * xStep
     const y = lineY + (1 - value / max) * h * 0.16
-    i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)
+    if (i) {
+      ctx.lineTo(x, y)
+    } else {
+      ctx.moveTo(x, y)
+    }
   })
   ctx.stroke()
 
@@ -229,7 +233,11 @@ function drawStreak({ ctx, w, h, t }: Frame, days: Day[]) {
     slice.forEach((day, i) => {
       const x = pad + i * step
       const y = baseY - Math.min(120, Math.log2(day.count + 1) * 18)
-      i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)
+      if (i) {
+        ctx.lineTo(x, y)
+      } else {
+        ctx.moveTo(x, y)
+      }
     })
     ctx.stroke()
     const last = slice[slice.length - 1]
@@ -418,7 +426,7 @@ export default function GitHubActivity() {
       ) : null}
 
       <div className="github-activity-stack">
-        {ANIMATIONS.map(([_, title, description], index) => (
+        {ANIMATIONS.map(([, title, description], index) => (
           <CanvasCard key={title} index={index} title={title} description={description} days={days} />
         ))}
       </div>
