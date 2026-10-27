@@ -6,6 +6,7 @@ import Footer from './components/layout/Footer'
 import Navigation from './components/layout/Navigation'
 import About from './components/sections/About'
 import Contact from './components/sections/Contact'
+import GitHubActivity from './components/sections/GitHubActivity'
 import Hero from './components/sections/Hero'
 import Journey from './components/sections/Journey'
 import Lab from './components/sections/Lab'
@@ -27,6 +28,7 @@ export default function Home() {
       <System />
       <About />
       <Lab />
+      <GitHubActivity />
       <Journey />
       <Contact />
       <Footer />
