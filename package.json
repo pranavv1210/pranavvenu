@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit",
-    "github:sync": "node scripts/fetch-github.mjs"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -26,7 +25,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.35",
     "pdf-parse": "^2.4.5",
-    "pdf2json": "^4.0.2",
+    "pdf2json": "^4.0.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
