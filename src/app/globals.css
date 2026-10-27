@@ -1125,8 +1125,11 @@ html[data-theme='light'] .text-outline {
 .github-calendar-scroll {
   max-width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
   scrollbar-color: var(--accent) transparent;
   scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
 }
 
 .github-canvas-wrap {
@@ -1219,6 +1222,11 @@ html[data-theme='light'] .text-outline {
 }
 
 @media (max-width: 520px) {
+  .github-activity-section {
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+  }
+
   .github-signal-head {
     align-items: flex-end;
     padding: 1.1rem;
@@ -1229,6 +1237,7 @@ html[data-theme='light'] .text-outline {
   }
 
   .github-canvas-wrap {
+    min-width: 660px;
     padding: 1.25rem 1rem;
   }
 

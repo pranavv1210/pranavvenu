@@ -63,6 +63,7 @@ export default function GitHubActivity() {
   const frameRef = useRef<number>()
   const [visible, setVisible] = useState(false)
   const [replayKey, setReplayKey] = useState(0)
+  const [viewportKey, setViewportKey] = useState(0)
   const [reducedMotion, setReducedMotion] = useState(false)
   const [displayTotal, setDisplayTotal] = useState(0)
   const [hover, setHover] = useState<{ x: number; y: number; day: Day } | null>(null)
@@ -91,6 +92,19 @@ export default function GitHubActivity() {
   }, [])
 
   useEffect(() => {
+    let resizeFrame: number | undefined
+    const handleResize = () => {
+      if (resizeFrame) cancelAnimationFrame(resizeFrame)
+      resizeFrame = requestAnimationFrame(() => setViewportKey((key) => key + 1))
+    }
+    window.addEventListener('resize', handleResize, { passive: true })
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      if (resizeFrame) cancelAnimationFrame(resizeFrame)
+    }
+  }, [])
+
+  useEffect(() => {
     if (!visible && !reducedMotion) return
     const canvas = canvasRef.current
     const host = hostRef.current
@@ -98,17 +112,19 @@ export default function GitHubActivity() {
     const context = canvas.getContext('2d')
     if (!context) return
 
+    const rect = host.getBoundingClientRect()
+    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    const width = Math.max(1, rect.width)
+    const height = Math.max(1, rect.height)
+    canvas.width = Math.round(width * dpr)
+    canvas.height = Math.round(height * dpr)
+    canvas.style.width = `${width}px`
+    canvas.style.height = `${height}px`
+    context.setTransform(dpr, 0, 0, dpr, 0, 0)
+
     const startedAt = performance.now()
+    let lastTotal = -1
     const draw = (now: number) => {
-      const rect = host.getBoundingClientRect()
-      const dpr = Math.min(window.devicePixelRatio || 1, 2)
-      const width = Math.max(1, rect.width)
-      const height = Math.max(1, rect.height)
-      canvas.width = Math.round(width * dpr)
-      canvas.height = Math.round(height * dpr)
-      canvas.style.width = `${width}px`
-      canvas.style.height = `${height}px`
-      context.setTransform(dpr, 0, 0, dpr, 0, 0)
       context.clearRect(0, 0, width, height)
 
       const columns = 53
@@ -167,7 +183,11 @@ export default function GitHubActivity() {
         context.fillRect(sweepX - 36, originY - 5, 44, height - originY)
       }
 
-      setDisplayTotal(Math.round(data.total * progress))
+      const nextTotal = Math.round(data.total * progress)
+      if (nextTotal !== lastTotal) {
+        lastTotal = nextTotal
+        setDisplayTotal(nextTotal)
+      }
       if (!reducedMotion && elapsed < 1900) frameRef.current = requestAnimationFrame(draw)
     }
 
@@ -175,7 +195,7 @@ export default function GitHubActivity() {
     return () => {
       if (frameRef.current) cancelAnimationFrame(frameRef.current)
     }
-  }, [days, reducedMotion, replayKey, visible])
+  }, [days, reducedMotion, replayKey, viewportKey, visible])
 
   const handleMove = (event: React.MouseEvent<HTMLCanvasElement>) => {
     if (!days.length) return
@@ -202,7 +222,7 @@ export default function GitHubActivity() {
 
   return (
     <section id="github" className="section-shell github-activity-section">
-      <div className="section-kicker">06 / Contribution signal</div>
+      <div className="section-kicker">Live / Contribution signal</div>
       <div className="section-heading">
         <h2>Built in public.</h2>
         <div>

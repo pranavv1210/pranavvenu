@@ -23,12 +23,12 @@ export default function Home() {
       <CustomCursor />
       <Navigation />
       <Hero />
+      <GitHubActivity />
       <Work />
       <Websites />
       <System />
       <About />
       <Lab />
-      <GitHubActivity />
       <Journey />
       <Contact />
       <Footer />
