@@ -1029,85 +1029,77 @@ html[data-theme='light'] .text-outline {
   overflow: hidden;
 }
 
-.github-stat-row {
+.github-profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+  color: var(--accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: color 180ms ease, gap 180ms ease;
+}
+
+.github-profile-link:hover,
+.github-profile-link:focus-visible {
+  gap: 0.7rem;
+  color: var(--text);
+}
+
+.github-signal-panel {
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    radial-gradient(circle at 90% 0%, var(--shadow-accent), transparent 24rem),
+    var(--panel-bg);
+  background-size: 22px 22px, 22px 22px, auto, auto;
+}
+
+.github-signal-head {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem 1rem;
-  margin-top: 1.35rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem;
+}
+
+.github-signal-head > div {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: baseline;
+  column-gap: 0.65rem;
+}
+
+.github-signal-label {
+  grid-column: 1 / -1;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--accent);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.github-signal-head strong {
+  color: var(--text);
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  line-height: 0.8;
+}
+
+.github-signal-head small {
+  color: var(--muted);
   font-family: var(--font-geist-mono), monospace;
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
-}
-
-.github-stat-row span,
-.github-stat-row a {
-  border: 1px solid var(--border);
-  padding: 0.55rem 0.7rem;
-}
-
-.github-stat-row strong {
-  color: var(--text);
-}
-
-.github-stat-row a {
-  color: var(--accent);
-  transition: border-color 180ms ease, transform 180ms ease;
-}
-
-.github-stat-row a:hover {
-  transform: translateY(-1px);
-  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
-}
-
-.github-activity-stack {
-  display: grid;
-  gap: 1px;
-  border: 1px solid var(--border);
-  background: var(--border);
-}
-
-.github-activity-card {
-  min-width: 0;
-  background:
-    radial-gradient(circle at 92% 12%, var(--shadow-accent), transparent 18rem),
-    var(--panel-bg);
-}
-
-.github-activity-card-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1.5rem;
-  border-bottom: 1px solid var(--border);
-  padding: 1.25rem 1.2rem;
-}
-
-.github-activity-index {
-  display: block;
-  margin-bottom: 0.55rem;
-  color: var(--accent);
-  font-family: var(--font-geist-mono), monospace;
-  font-size: 9px;
-  letter-spacing: 0.22em;
-}
-
-.github-activity-card h3 {
-  margin: 0;
-  color: var(--text);
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  font-weight: 900;
-  line-height: 0.95;
-  text-transform: uppercase;
-}
-
-.github-activity-card p {
-  max-width: 34rem;
-  margin: 0.55rem 0 0;
-  color: var(--secondary);
-  font-size: 0.92rem;
-  line-height: 1.55;
 }
 
 .github-replay {
@@ -1130,18 +1122,26 @@ html[data-theme='light'] .text-outline {
   border-color: color-mix(in srgb, var(--accent) 60%, transparent);
 }
 
+.github-calendar-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-color: var(--accent) transparent;
+  scrollbar-width: thin;
+}
+
 .github-canvas-wrap {
   position: relative;
-  min-height: clamp(15rem, 34vw, 26rem);
-  padding: 1rem;
+  width: 100%;
+  min-width: 700px;
+  height: clamp(13rem, 22vw, 17rem);
+  padding: 1.5rem;
 }
 
 .github-canvas-wrap canvas {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: 13rem;
-  touch-action: pan-y;
+  touch-action: pan-x pan-y;
 }
 
 .github-tooltip {
@@ -1168,43 +1168,71 @@ html[data-theme='light'] .text-outline {
   font-size: 9px;
 }
 
-.github-sync-state {
+.github-signal-stats {
   display: grid;
-  gap: 0.4rem;
-  margin-bottom: 1rem;
-  border: 1px solid var(--border);
-  background: var(--panel-soft);
-  padding: 1rem 1.1rem;
-  color: var(--secondary);
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel-soft) 72%, transparent);
 }
 
-.github-sync-state span {
-  color: var(--text);
+.github-signal-stats > div {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 0;
+  padding: 1.1rem 1.25rem;
+  border-right: 1px solid var(--border);
+}
+
+.github-signal-stats > div:last-child {
+  border-right: 0;
+}
+
+.github-signal-stats span {
+  color: var(--muted);
   font-family: var(--font-geist-mono), monospace;
-  font-size: 10px;
+  font-size: 8px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.github-sync-state small {
-  font-size: 0.82rem;
+.github-signal-stats strong {
+  overflow: hidden;
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-@media (max-width: 640px) {
-  .github-activity-card-head {
-    flex-direction: column;
+@media (max-width: 800px) {
+  .github-signal-stats {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .github-replay {
-    align-self: flex-start;
+  .github-signal-stats > div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .github-signal-stats > div:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+@media (max-width: 520px) {
+  .github-signal-head {
+    align-items: flex-end;
+    padding: 1.1rem;
+  }
+
+  .github-signal-head small {
+    display: none;
   }
 
   .github-canvas-wrap {
-    min-height: 13rem;
-    padding: 0.55rem;
+    padding: 1.25rem 1rem;
   }
 
-  .github-canvas-wrap canvas {
-    min-height: 11rem;
+  .github-signal-stats > div {
+    padding: 1rem;
   }
 }

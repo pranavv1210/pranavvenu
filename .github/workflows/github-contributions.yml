@@ -1,0 +1,37 @@
+name: Refresh contribution data
+
+on:
+  schedule:
+    - cron: '17 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Fetch GitHub contribution calendar
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GH_CONTRIBUTIONS_TOKEN: ${{ secrets.GH_CONTRIBUTIONS_TOKEN }}
+          GITHUB_USERNAME: pranavv1210
+        run: node scripts/fetch-github.mjs
+
+      - name: Commit changed data
+        run: |
+          if git diff --quiet -- data/github.json; then
+            echo "Contribution data is already current."
+            exit 0
+          fi
+          git config user.name "pranavv1210"
+          git config user.email "168800261+pranavv1210@users.noreply.github.com"
+          git add data/github.json
+          git commit -m "chore: refresh contribution data"
+          git push origin main
