@@ -1,78 +1,49 @@
-import { execSync } from 'node:child_process'
 import { mkdirSync, writeFileSync } from 'node:fs'
 
-const username = process.env.GITHUB_USERNAME || 'pranavv1210'
-const token = process.env.GITHUB_TOKEN || process.env.GH_CONTRIBUTIONS_TOKEN || (() => {
-  try {
-    return execSync('gh auth token').toString().trim()
-  } catch {
-    return ''
-  }
-})()
+const username = 'pranavv1210'
+const url = `https://github.com/users/${username}/contributions`
 
-if (!token) {
-  throw new Error('No GitHub token found. Set GITHUB_TOKEN/GH_CONTRIBUTIONS_TOKEN or run gh auth login.')
-}
-
-const query = `
-  query Contributions($login: String!) {
-    user(login: $login) {
-      contributionsCollection {
-        contributionCalendar {
-          totalContributions
-          weeks {
-            contributionDays {
-              date
-              contributionCount
-              contributionLevel
-            }
-          }
-        }
-      }
-    }
-  }
-`
-
-const response = await fetch('https://api.github.com/graphql', {
-  method: 'POST',
+const response = await fetch(url, {
   headers: {
-    Authorization: `bearer ${token}`,
-    'Content-Type': 'application/json',
-    'User-Agent': 'pranavvenu-portfolio-github-sync',
+    'User-Agent': 'pranavvenu-portfolio-github-contributions',
+    Accept: 'text/html,application/xhtml+xml',
   },
-  body: JSON.stringify({ query, variables: { login: username } }),
 })
 
 if (!response.ok) {
-  throw new Error(`GitHub GraphQL request failed: ${response.status} ${response.statusText}`)
+  throw new Error(`GitHub contributions request failed: ${response.status} ${response.statusText}`)
 }
 
-const payload = await response.json()
-if (payload.errors?.length) {
-  throw new Error(payload.errors.map((error) => error.message).join('; '))
+const svg = await response.text()
+
+const dayPattern = /<rect[^>]*data-date="([^"]+)"[^>]*data-count="(\d+)"[^>]*data-level="(\d+)"[^>]*>/g
+const days = []
+let match
+
+while ((match = dayPattern.exec(svg)) !== null) {
+  days.push({
+    date: match[1],
+    count: Number(match[2]),
+    level: Number(match[3]),
+  })
 }
 
-const calendar = payload.data?.user?.contributionsCollection?.contributionCalendar
-if (!calendar) throw new Error(`No contribution calendar found for @${username}`)
-
-const levelMap = {
-  NONE: 0,
-  FIRST_QUARTILE: 1,
-  SECOND_QUARTILE: 2,
-  THIRD_QUARTILE: 3,
-  FOURTH_QUARTILE: 4,
+if (!days.length) {
+  throw new Error(`No contribution days found for @${username}`)
 }
 
-const days = calendar.weeks.flatMap((week) => week.contributionDays)
+// GitHub's public contribution calendar exposes the exact daily counts and levels.
+// The total is calculated from those same visible days so the portfolio never needs
+// a GitHub token or a repository-writing sync job.
 const output = {
   username,
   fetchedAt: new Date().toISOString(),
-  start: days[0]?.date ?? '',
-  total: calendar.totalContributions ?? 0,
-  counts: days.map((day) => day.contributionCount),
-  levels: days.map((day) => levelMap[day.contributionLevel] ?? 0).join(''),
+  start: days[0].date,
+  total: days.reduce((sum, day) => sum + day.count, 0),
+  counts: days.map((day) => day.count),
+  levels: days.map((day) => day.level).join(''),
 }
 
 mkdirSync('data', { recursive: true })
 writeFileSync('data/github.json', `${JSON.stringify(output, null, 2)}\n`)
-console.log(`Saved ${days.length} contribution days for @${username} (${output.total} total contributions).`)
+console.log(`Saved ${days.length} contribution days for @${username} (${output.total} visible contributions).`)
